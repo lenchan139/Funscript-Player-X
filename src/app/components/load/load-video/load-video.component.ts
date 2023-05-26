@@ -38,6 +38,7 @@ export class LoadVideoComponent {
     this.userInputService.videoURL.next(
       this.userInputService.urlForm.controls.url.value
     );
+    this.userInputService.mediaFormat.next('video')
   }
 
   // user upload method
@@ -57,6 +58,7 @@ export class LoadVideoComponent {
       this.video.next(files[0]);
       const videoURL = URL.createObjectURL(files[0]);
       this.userInputService.videoURL.next(videoURL);
+      this.userInputService.mediaFormat.next(files[0].type.includes('audio') ? 'audio' : 'video')
 
       return this.notifications.showToast(`Loaded ${files[0].name}`, 'success');
     } else {

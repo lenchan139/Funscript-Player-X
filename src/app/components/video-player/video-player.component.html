@@ -1,35 +1,29 @@
 <div class="video-container" *ngIf="userInputService.videoURL | async">
-  <vm-player
-    *ngIf="!reload"
-    #player
-    (vmPausedChange)="eventSyncerService.onPausedChange(player.paused)"
-    (vmSeeked)="eventSyncerService.onSeekedChange(player.currentTime * 1000)"
-    muted
-    theme="dark"
-    style="--vm-player-theme: #2a7bc6"
-  >
-    <vm-video *ngIf="!(playerStatus | async)?.error; else hls">
-      <source
-        (error)="logError('standard', $event)"
-        [src]="
+  <vm-player *ngIf="!reload" #player (vmPausedChange)="eventSyncerService.onPausedChange(player.paused)"
+    (vmSeeked)="eventSyncerService.onSeekedChange(player.currentTime * 1000)" muted theme="dark"
+    style="--vm-player-theme: #2a7bc6">
+
+    <ng-container *ngIf="userInputService.mediaFormat.value != 'audio'">
+      <vm-video *ngIf="!(playerStatus | async)?.error; else hls">
+        <source (error)="logError('standard', $event)" [src]="
           sanitizer.bypassSecurityTrustUrl(userInputService.videoURL.value)
-        "
-        type="video/mp4"
-      />
-    </vm-video>
+        " type="video/mp4" />
+      </vm-video>
+    </ng-container>
+    <ng-container *ngIf="userInputService.mediaFormat.value == 'audio'">
+
+      <vm-audio *ngIf="!(playerStatus | async)?.error; else hls">
+        <source (error)="logError('standard', $event)" [src]="
+            sanitizer.bypassSecurityTrustUrl(userInputService.videoURL.value)
+          " type="audio/mp3" />
+      </vm-audio>
+    </ng-container>
 
     <ng-template #hls>
-      <vm-hls
-        (vmError)="logError('hls', $event)"
-        *ngIf="userInputService.videoURL.value"
-        version="latest"
-      >
-        <source
-          [src]="
+      <vm-hls (vmError)="logError('hls', $event)" *ngIf="userInputService.videoURL.value" version="latest">
+        <source [src]="
             sanitizer.bypassSecurityTrustUrl(userInputService.videoURL.value)
-          "
-          type="application/x-mpegURL"
-        />
+          " type="application/x-mpegURL" />
       </vm-hls>
     </ng-template>
 

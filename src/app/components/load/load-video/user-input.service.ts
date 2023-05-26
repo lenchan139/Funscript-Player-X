@@ -4,11 +4,14 @@ import { NotificationsService } from '../../../notifications.service';
 import { Funscript } from 'funscript-utils/lib/types';
 import { FormBuilder, Validators } from '@angular/forms';
 
+type IVideoAUdioFormat = 'video' | 'audio' | ''
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserInputService {
   videoURL: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  mediaFormat: BehaviorSubject<IVideoAUdioFormat> = new BehaviorSubject<IVideoAUdioFormat>('');
   funscriptFile = new BehaviorSubject<{ name: string; file: Funscript }>({
     name: '',
     file: { actions: [] },
