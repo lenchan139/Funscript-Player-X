@@ -113,4 +113,5 @@ export class VideoPlayerComponent implements OnInit {
         }
       });
   }
+  
 }
