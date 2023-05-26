@@ -3,7 +3,7 @@
       type="file"
       style="display: none"
       #videoInput
-      accept="video/*"
+      accept="video/*,audio/*"
       (change)="onChangeFileInput()"
     />
     <br />
@@ -19,7 +19,7 @@
           "
           (click)="onClickFileInputButton()"
         >
-          Select video
+          Select audio/video
         </button>
       </nz-breadcrumb-item>
       <nz-breadcrumb-item>
@@ -55,7 +55,7 @@
                     nzType="primary"
                     type="submit"
                   >
-                    Load Video
+                    Load Audio/Video
                   </button>
                 </div>
               </div>
@@ -68,7 +68,7 @@
     <span class="file-name" *ngIf="video.value === undefined; else videoName">
       No video selected!</span
     >
-    <span> Accepts video files and HLS streams.</span>
+    <span> Accepts audio&video files and HLS streams.</span>
     <br />
     <br />
     <ng-template #videoName>

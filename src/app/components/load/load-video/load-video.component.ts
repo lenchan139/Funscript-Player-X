@@ -49,8 +49,8 @@ export class LoadVideoComponent {
     if (this.videoInput.nativeElement.files.length > 0) {
       const files: { [key: string]: File } =
         this.videoInput.nativeElement.files;
-
-      if (!files[0].type.includes('video')) {
+      console.log('vv',files[0].type)
+      if (!files[0].type.includes('video') && !files[0].type.includes('audio')) {
         return this.notifications.showToast(`Invalid video file.`, 'error');
       }
 
