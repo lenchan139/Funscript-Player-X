@@ -1,6 +1,12 @@
 # FsPlayer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
+This project was Forked from martinAlt335/Funscript-Player and add support audio sync playing.
+
+You can go to [fplayer.tto.moe](https://fplayer.tto.moe) to play for audio/video with funscript.
+
+## TO-DO
+- [x] Support Audio
+- [ ] fit in phone screen
 
 ## Development server
 
